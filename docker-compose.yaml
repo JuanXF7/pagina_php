@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+
+  web:
+    build: .
+    container_name: apache_php
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    volumes:
+      - ./pagina_php:/var/www/html
+
+  mysql:
+    image: mysql:8
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: alimentos_db
+      MYSQL_USER: usuario_alimentos
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
+
+volumes:
+  mysql_data:
