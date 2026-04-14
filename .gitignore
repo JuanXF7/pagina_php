@@ -3,3 +3,4 @@ mysql_data/
 *.log
 .env
 database/
+.env
